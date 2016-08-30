@@ -20,7 +20,7 @@ We prepocess the original data to make it satisfy the input format of our codes.
 
 Pre-trained word vectors are learned on each dataset (IMDB, Yelp13, Yelp14) separately.
 
-To run our NSC and NSC+LA model on new dataset, the dataset should be in the same format as the dataset we publish, containing five files:
+To run our NSC and NSC+LA model on new dataset, the dataset should be put in the folder NSC/data/XX/ or NSC+LA/data/XX/ using the following format, containing five files:
 + train.txt: training file, format (userid	productid	class	document), split by '\t'.
 + dev.txt: dev file, same format as train.txt.
 + test.txt: test file, same format as train.txt.
