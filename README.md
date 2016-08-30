@@ -1,4 +1,3 @@
-# NSC
 Neural Sentiment Classification
 ==========
 
