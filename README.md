@@ -14,7 +14,7 @@ In the above table, baseline models including Majority, Trigram, TextFeature, UP
 Data
 ==========
 
-We provide IMDB, Yelp13 and Yelp14 datasets we used for sentiment classification in [[Download]](http://www.thunlp.org/~chm/data/data.zip). The dataset should be decompressed and put in the folder NSC/, NSC+LA/ or NSC+UPA/ after being downloaded.
+We provide IMDB, Yelp13 and Yelp14 datasets we used for sentiment classification in [[Download]](http://www.thunlp.org/~chm/data/data.zip). The dataset should be decompressed and put in the folder NSC/, NSC+LA/ or NSC+UPA/.
 
 We prepocess the original data to make it satisfy the input format of our codes. The original datasets are released by the paper [Tang et al., 2015]. [[Download]](http://ir.hit.edu.cn/~dytang/paper/acl2015/dataset.7z)
 
