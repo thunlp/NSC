@@ -14,20 +14,20 @@ In the above table, baseline models including Majority, Trigram, TextFeature, UP
 Data
 ==========
 
-We provide IMDB, Yelp13 and Yelp14 dataset we used for sentiment classification in [[Download]](http://www.thunlp.org/~chm/data/data.zip). The dataset should be decompressed and put in the folder NSC/, NSC+LA/ or NSC+UPA/ after downloaded.
+We provide IMDB, Yelp13 and Yelp14 dataset we used for sentiment classification in [[Download]](http://www.thunlp.org/~chm/data/data.zip). The dataset should be decompressed and put in the folder NSC/, NSC+LA/ or NSC+UPA/ after being downloaded.
 
-We propocess the original data to make it satisfy the input format of our codes. The original datasets are released by the paper "Learning Semantic Representations of Users and Products for Document Level Sentiment Classification." [[Download]](http://ir.hit.edu.cn/~dytang/paper/acl2015/dataset.7z)
+We prepocess the original data to make it satisfy the input format of our codes. The original datasets are released by the paper [Tang et al., 2015]. [[Download]](http://ir.hit.edu.cn/~dytang/paper/acl2015/dataset.7z)
 
 Pre-trained word vectors are learned on each dataset (IMDB, Yelp13, Yelp14) separately.
 
-To run our NSC and NSC+LA model with other dataset, the dataset should be put in the folder data/XX/ using the following format, containing five files:
+To run our NSC and NSC+LA model on new dataset, the dataset should be in the same format as the dataset we publish, containing five files:
 + train.txt: training file, format (userid	productid	class	document), split by '\t'.
 + dev.txt: dev file, same format as train.txt.
 + test.txt: test file, same format as train.txt.
 + wordlist.txt: corresponding words with same sequence in pre-trained word vectors, one per line.
 + embinit.save: the pre-trained word embedding file, which is saved as pickle and can be loaded from pickle to numpy arrays.
 
-To run our NSC+UPA model with other dataset, the dataset should be put more two files in the folder data/XX/ using the following format:
+To run our NSC+UPA model on new dataset, the dataset should be put two more files in the folder data/XX/ using the following format:
 + usrlist.txt: user ids in each dataset, per one line.
 + prdlist.txt: product ids in each dataset, per one line.
 
