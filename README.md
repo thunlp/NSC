@@ -69,10 +69,12 @@ Cite
 ==========
 
 If you use the code, please cite the following paper:
+
 [Chen et al., 2016] Huimin Chen, Maosong Sun, Cunchao Tu, Yankai Lin and Zhiyuan Liu. Neural Sentiment Classification with User and Product Attention. In proceedings of EMNLP.[[pdf]](http://www.thunlp.org/~chm/publications/emnlp2016_NSCUPA.pdf)
 
 Reference
 ==========
 [Chen et al., 2016] Huimin Chen, Maosong Sun, Cunchao Tu, Yankai Lin and Zhiyuan Liu. Neural Sentiment Classification with User and Product Attention. In proceedings of EMNLP.[[pdf]](http://www.thunlp.org/~chm/publications/emnlp2016_NSCUPA.pdf)
+
 [Tang et al., 2015] Duyu Tang, Bing Qin, Ting Liu. Learning Semantic Representations of Users and Products for Document Level Sentiment Classification. In Proceedings of EMNLP.
 
