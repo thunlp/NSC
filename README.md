@@ -1,7 +1,7 @@
 Neural Sentiment Classification
 ==========
 
-Neural Sentiment Classification aims to classify the sentiment in a document with neural models, which has been the state-of-the-art methods for sentiment classification. In this project, we provide our implementations of NSC [Chen et al., 2016], NSC+LA [Chen et al., 2016] and NSC+UPA [Chen et al., 2016] in which user and product information is considered via attentions over different semantic levels.
+Neural Sentiment Classification aims to classify the sentiment in a document with neural models, which has been the state-of-the-art methods for sentiment classification. In this project, we provide our implementations of NSC, NSC+LA and NSC+UPA [Chen et al., 2016] in which user and product information is considered via attentions over different semantic levels.
 
 Evaluation Results
 ==========
@@ -73,4 +73,6 @@ If you use the code, please cite the following paper:
 
 Reference
 ==========
+[Chen et al., 2016] Huimin Chen, Maosong Sun, Cunchao Tu, Yankai Lin and Zhiyuan Liu. Neural Sentiment Classification with User and Product Attention. In proceedings of EMNLP.[[pdf]](http://www.thunlp.org/~chm/publications/emnlp2016_NSCUPA.pdf)
 [Tang et al., 2015] Duyu Tang, Bing Qin, Ting Liu. Learning Semantic Representations of Users and Products for Document Level Sentiment Classification. In Proceedings of EMNLP.
+
