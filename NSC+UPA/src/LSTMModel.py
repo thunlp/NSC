@@ -62,7 +62,7 @@ class LSTMModel(object):
         for layer in layers:
             params += layer.params
         L2_rate = numpy.float32(1e-5)
-        for param in params[5:]:
+        for param in params[3:]:
             cost += T.sum(L2_rate * (param * param), acc_dtype='float32')
         gparams = [T.grad(cost, param) for param in params]
 
