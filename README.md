@@ -29,6 +29,8 @@ The dataset in each domain contains seven files, using the following format:
 + prdlist.txt: product ids in each dataset, per one line.
 + embinit.save: the pre-trained word embedding file, which is saved as pickle and can be loaded from pickle to numpy arrays.
 
+The trained model can be found at this [link](http://www.thunlp.org/~chm/data/emnlp2016_model.zip).
+
 Codes
 ==========
 
