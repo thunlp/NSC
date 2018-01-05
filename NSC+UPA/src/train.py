@@ -6,12 +6,21 @@ from LSTMModel import LSTMModel
 
 dataname = sys.argv[1]
 classes = sys.argv[2]
-voc = Wordlist('../data/'+dataname+'/wordlist.txt')
-usrdict = Usrlist('../data/'+dataname+'/usrlist.txt')
-prddict = Prdlist('../data/'+dataname+'/prdlist.txt')
+# voc = Wordlist('../data/'+dataname+'/wordlist.txt')
+# usrdict = Usrlist('../data/'+dataname+'/usrlist.txt')
+# prddict = Prdlist('../data/'+dataname+'/prdlist.txt')
 
-trainset = Dataset('../data/'+dataname+'/train.txt', voc, usrdict, prddict)
-devset = Dataset('../data/'+dataname+'/dev.txt', voc, usrdict, prddict)
+# trainset = Dataset('../data/'+dataname+'/train.txt', voc, usrdict, prddict)
+# devset = Dataset('../data/'+dataname+'/dev.txt', voc, usrdict, prddict)
+# print 'data loaded.'
+
+print 'loading data.'
+voc = Wordlist('../../../data/'+dataname+'/wordlist.txt')
+usrdict = Usrlist('../../../data/'+dataname+'/usrlist.txt')
+prddict = Prdlist('../../../data/'+dataname+'/prdlist.txt')
+
+trainset = Dataset('../../../data/'+dataname+'/train.txt', voc, usrdict, prddict, maxbatch = 16)
+devset = Dataset('../../../data/'+dataname+'/test.txt', voc, usrdict, prddict, maxbatch = 16)
 print 'data loaded.'
 
 model = LSTMModel(voc.size, usrdict.size, prddict.size, trainset, devset, dataname, classes, None)

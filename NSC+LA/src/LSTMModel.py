@@ -18,6 +18,9 @@ class LSTMModel(object):
         self.trainset = trainset
         self.testset = testset
 
+        self.doc_emb = numpy.empty(shape=[trainset.num_doc,200], dtype=numpy.float32)
+        self.doc_emb_test = numpy.empty(shape=[testset.num_doc,200], dtype=numpy.float32)
+
         docs = T.imatrix()
         label = T.ivector()
         wordmask = T.fmatrix()
@@ -37,6 +40,8 @@ class LSTMModel(object):
         layers.append(HiddenLayer(rng, layers[-1].output, 200, 200, 'fulllayer', prefix))
         layers.append(HiddenLayer(rng, layers[-1].output, 200, int(classes), 'softmaxlayer', prefix, activation=T.nnet.softmax))
         self.layers = layers
+
+        docrepresentation = layers[5].output
         
         cost = -T.mean(T.log(layers[-1].output)[T.arange(label.shape[0]), label], acc_dtype='float32')
         correct = T.sum(T.eq(T.argmax(layers[-1].output, axis=1), label), acc_dtype='int32')
@@ -55,13 +60,13 @@ class LSTMModel(object):
 
         self.train_model = theano.function(
             inputs=[docs, label,wordmask,sentencemask,maxsentencenum],
-            outputs=cost,
+            outputs=[cost,docrepresentation],
             updates=updates,
         )
 
         self.test_model = theano.function(
             inputs=[docs, label,wordmask,sentencemask,maxsentencenum],
-            outputs=[correct, mse],
+            outputs=[correct, mse, docrepresentation],
         )
 
     def train(self, iters):
@@ -69,8 +74,10 @@ class LSTMModel(object):
         n = 0
         for i in lst:
             n += 1
-            out = self.train_model(self.trainset.docs[i], self.trainset.label[i],self.trainset.wordmask[i],self.trainset.sentencemask[i],self.trainset.maxsentencenum[i])
-            print n, 'cost:',out
+            [out, docrepresentation] = self.train_model(self.trainset.docs[i], self.trainset.label[i],self.trainset.wordmask[i],self.trainset.sentencemask[i],self.trainset.maxsentencenum[i])
+            # print n, 'cost:',out
+            self.doc_emb[i*16:(i+1)*16,:] = docrepresentation
+        self.save_doc_emb(self.doc_emb)
         
     def test(self):
         cor = 0
@@ -81,7 +88,9 @@ class LSTMModel(object):
             cor += tmp[0]
             mis += tmp[1]
             tot += len(self.testset.label[i])
+            self.doc_emb_test[i*16:(i+1)*16,:] = tmp[2]
         print 'Accuracy:',float(cor)/float(tot),'RMSE:',numpy.sqrt(float(mis)/float(tot))
+        self.save_doc_emb_test(self.doc_emb_test)
         return cor, mis, tot
 
 
@@ -89,3 +98,21 @@ class LSTMModel(object):
         prefix += '/'
         for layer in self.layers:
             layer.save(prefix)
+
+    def save_doc_emb(self, doc_emb):
+        f = file('../nscla_emb_doc_train.save', 'wb')
+        cPickle.dump(doc_emb, f, protocol=cPickle.HIGHEST_PROTOCOL)
+        f.close()
+        print '-> saved doc embedding training'
+        
+    def save_doc_emb_test(self, doc_emb):
+        f = file('../nscla_emb_doc_test.save', 'wb')
+        cPickle.dump(doc_emb, f, protocol=cPickle.HIGHEST_PROTOCOL)
+        f.close()
+        print '-> saved doc embedding testing'
+
+    def load_doc_emb(self):
+        f = file('../emb_doc.save', 'rb')
+        result = cPickle.load(f)
+        f.close()
+        return result

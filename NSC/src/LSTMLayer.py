@@ -17,6 +17,7 @@ def randMatrix(rng, shape, lim):
 class LSTMLayer(object):
     def __init__(self, rng, input, mask, n_in, n_out, name, prefix=None):
         self.input = input
+        # print input.shape
         self.name = name
 
         limV = numpy.sqrt(6. / (n_in + n_out * 2))
@@ -94,6 +95,7 @@ class LSTMLayer(object):
             Ct = T.tanh(T.dot(emb, self.Wc1) + T.dot(prev, self.Wc2) + self.bc)
 
             CC = C * Gf + Ct * Gi
+            self.special = mask.dimshuffle(0,'x')
             CC = CC * mask.dimshuffle(0,'x') 
             CC = T.cast(CC,'float32')
             h = T.tanh(CC) * Go
@@ -105,7 +107,12 @@ class LSTMLayer(object):
             outputs_info=[T.zeros_like(T.dot(input[0], self.Wi1)), T.zeros_like(T.dot(input[0], self.Wi1))],
             sequences=[input, mask])
 
+        # special = mask.dimshuffle(0,'x')
+
         self.output = outs[1]
+        # self.special = special
+        print 'LSTMLayer'
+        print self.output.shape
 
         self.params = [self.Wi1, self.Wi2, self.bi, self.Wo1, self.Wo2, self.bo,
             self.Wf1, self.Wf2, self.bf, self.Wc1, self.Wc2, self.bc]

@@ -34,7 +34,7 @@ def gensentencemask(sentencenum):
     return mask.T
 
 class Dataset(object):
-    def __init__(self, filename, emb,maxbatch = 32,maxword = 500):
+    def __init__(self, filename, emb,maxbatch = 16,maxword = 500):
         lines = map(lambda x: x.split('\t\t'), open(filename).readlines())            
         label = numpy.asarray(
             map(lambda x: int(x[2])-1, lines),
