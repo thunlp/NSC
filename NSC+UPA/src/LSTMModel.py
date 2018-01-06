@@ -92,7 +92,7 @@ class LSTMModel(object):
             [out, docrepresentation] = self.train_model(self.trainset.docs[i], self.trainset.label[i],self.trainset.usr[i], self.trainset.prd[i],self.trainset.wordmask[i],self.trainset.sentencemask[i],self.trainset.maxsentencenum[i])
             self.doc_emb[i*16:(i+1)*16,:] = docrepresentation
             # print n, 'cost:',out
-        self.save_doc_emb(self.doc_emb)
+        # self.save_doc_emb(self.doc_emb)
         
     def test(self):
         cor = 0
@@ -105,7 +105,7 @@ class LSTMModel(object):
             tot += len(self.testset.label[i])
             self.doc_emb_test[i*16:(i+1)*16,:] = tmp[2]
         print 'Accuracy:',float(cor)/float(tot),'RMSE:',numpy.sqrt(float(mis)/float(tot))
-        self.save_doc_emb_test(self.doc_emb_test)
+        # self.save_doc_emb_test(self.doc_emb_test)
         return cor, mis, tot
 
 

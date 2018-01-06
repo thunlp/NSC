@@ -84,7 +84,6 @@ class LSTMModel(object):
             self.doc_emb[i*16:(i+1)*16,:] = docrepresentation
             # if (n % 100 == 0):
             #     self.save_doc_emb(self.doc_emb)
-        self.save_doc_emb(self.doc_emb)
         
     def test(self):
         cor = 0
@@ -97,8 +96,6 @@ class LSTMModel(object):
             tot += len(self.testset.label[i])
             self.doc_emb_test[i*16:(i+1)*16,:] = tmp[2]
         print 'Accuracy:',float(cor)/float(tot),'RMSE:',numpy.sqrt(float(mis)/float(tot))
-        # save document representation for test dataset
-        self.save_doc_emb_test(self.doc_emb_test)
         return cor, mis, tot
 
 
