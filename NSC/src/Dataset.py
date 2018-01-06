@@ -43,6 +43,8 @@ class Dataset(object):
         docs = map(lambda x: x.split('<sssss>'), docs) 
         docs = map(lambda doc: map(lambda sentence: sentence.split(' '),doc),docs)
         docs = map(lambda doc: map(lambda sentence: filter(lambda wordid: wordid !=-1,map(lambda word: emb.getID(word),sentence)),doc),docs)
+        self.num_doc = len(docs)
+        
         tmp = zip(docs, label)
         #random.shuffle(tmp)
         tmp.sort(lambda x, y: len(y[0]) - len(x[0]))  
