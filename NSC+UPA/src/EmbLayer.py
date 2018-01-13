@@ -10,7 +10,7 @@ class EmbLayer(object):
         self.name = name
 
         if prefix == None:
-            f = file('../data/'+dataname+'/embinit.save', 'rb')
+            f = file('../../../data/'+dataname+'/embinit.save', 'rb')
             W = cPickle.load(f)
             f.close()
             W = theano.shared(value=W, name='E', borrow=True)    
