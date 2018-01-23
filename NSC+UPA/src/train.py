@@ -31,7 +31,7 @@ result = model.test()
 print '****************************************************************************'
 print '\n'
 for i in xrange(1,400):
-	model.train(100)
+	model.train(trainset.epoch)
 	print '****************************************************************************'
 	print 'test',i+1
 	newresult=model.test()
