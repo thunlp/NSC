@@ -40,9 +40,10 @@ for i in xrange(1,400):
 	if newresult[0]>result[0] :
 		result=newresult
 		model.save('../model/'+dataname+'/bestmodel')
-        	# save document representation for dataset
-        	model.save_doc_emb(model.doc_emb)
-        	model.save_doc_emb_test(model.doc_emb_test)
-        	print 'better accuracy! saved doc_emb and model'
+        # save document representation for dataset
+        model.save_doc_emb(model.doc_emb)
+        model.save_doc_emb_test(model.doc_emb_test)
+        print '--> better accuracy! saved doc_emb, model and pred result on test set'
+        model.save_pred_test(model.pred_test)
 print 'bestmodel saved!'
 
