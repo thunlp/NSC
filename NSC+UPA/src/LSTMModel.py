@@ -124,7 +124,7 @@ class LSTMModel(object):
         print '-> saved doc embedding training'
 
     def save_pred_test(self, result):
-        f = file('../pred_test_lstm.save' % (self.data_dir, self.data_name), 'wb')
+        f = file('../pred_test_lstm.save', 'wb')
         cPickle.dump(result, f, protocol=cPickle.HIGHEST_PROTOCOL)
         f.close()
         print '--> saved final prediction: test_data'
