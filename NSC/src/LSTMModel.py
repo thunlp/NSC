@@ -79,6 +79,18 @@ class LSTMModel(object):
         n = 0
         for i in lst:
             n += 1
+            # print 'docs shape:'
+            # print numpy.shape(self.trainset.docs[i])
+            # #print 'expandlen shape:'
+            # #print numpy.shape(self.trainset.expandlen[i])
+            # print 'label shape:'
+            # print numpy.shape(self.trainset.label[i])
+            # print 'wordmask shape:'
+            # print numpy.shape(self.trainset.wordmask[i])
+            # print 'sentencemask shape:'
+            # print numpy.shape(self.trainset.sentencemask[i])
+            # print 'maxsentencenum shape:'
+            # print numpy.shape(self.trainset.maxsentencenum[i])
             [out, docrepresentation] = self.train_model(self.trainset.docs[i], self.trainset.label[i], self.trainset.length[i],self.trainset.sentencenum[i],self.trainset.wordmask[i],self.trainset.sentencemask[i],self.trainset.maxsentencenum[i])
             # print n, 'cost:',out
             # print 'docrepresen, shape: ', numpy.shape(docrepresentation)
@@ -98,7 +110,7 @@ class LSTMModel(object):
             self.doc_emb_test[i*16:(i+1)*16,:] = tmp[2]
             self.pred_test[i*16:(i+1)*16] = tmp[3]
         print 'Accuracy:',float(cor)/float(tot),'RMSE:',numpy.sqrt(float(mis)/float(tot))
-        return cor, mis, tot
+        return cor, mis, tot, float(cor)/float(tot)
 
 
     def save(self, prefix):

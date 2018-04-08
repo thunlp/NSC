@@ -29,7 +29,7 @@ for i in xrange(1,400):
 	newresult=model.test()
 	print '****************************************************************************'
 	print '\n'
-	if newresult[0]>currentresult[0] :
+	if newresult[3]>currentresult[3] :
 		currentresult=newresult
         # save document representation for dataset
         model.save_doc_emb(model.doc_emb)
