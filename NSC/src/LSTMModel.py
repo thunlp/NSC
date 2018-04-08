@@ -131,7 +131,7 @@ class LSTMModel(object):
         print '-> saved doc embedding testing'
 
     def save_pred_test(self, result):
-        f = file('../cba_pred_test_lstm.save', 'wb')
+        f = file('../nsc_pred_test_lstm.save', 'wb')
         cPickle.dump(result, f, protocol=cPickle.HIGHEST_PROTOCOL)
         f.close()
         print '--> saved final prediction: test_data'
