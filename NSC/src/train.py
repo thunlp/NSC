@@ -16,14 +16,14 @@ print 'data loaded.'
 model = LSTMModel(voc.size,trainset, devset, dataname, classes, None)
 # model = LSTMModel(voc.size, trainset, devset, dataname, classes, '../model/' + dataname + '/bestmodel')
 
-model.train(5)
+model.train(100)
 print '****************************************************************************'
 print 'test 1'
 currentresult = model.test()
 print '****************************************************************************'
 print '\n'
 for i in xrange(1,400):
-	model.train(5)
+	model.train(100)
 	print '****************************************************************************'
 	print 'test',i+1
 	newresult=model.test()
