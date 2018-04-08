@@ -36,6 +36,6 @@ for i in xrange(1,400):
         model.save_doc_emb_test(model.doc_emb_test)
         model.save_pred_test(model.pred_test)
         print '--> better accuracy! saved doc_emb, model and pred result on test set'
-		model.save('../model/'+dataname+'/bestmodel')
+        model.save('../model/'+dataname+'/bestmodel')
 print 'bestmodel saved!'
 
