@@ -110,7 +110,7 @@ class LSTMModel(object):
             self.doc_emb_test[i*16:(i+1)*16,:] = tmp[2]
             self.pred_test[i*16:(i+1)*16] = tmp[3]
         print 'Accuracy:',float(cor)/float(tot),'RMSE:',numpy.sqrt(float(mis)/float(tot))
-        return cor, mis, tot, float(cor)/float(tot)
+        return cor, mis, tot
 
 
     def save(self, prefix):
