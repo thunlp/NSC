@@ -21,7 +21,7 @@ class LSTMModel(object):
 
         self.doc_emb = numpy.empty(shape=[trainset.num_doc,200], dtype=numpy.float32)
         self.doc_emb_test = numpy.empty(shape=[testset.num_doc,200], dtype=numpy.float32)
-        # self.doc_emb = numpy.asarray(self.load_doc_emb(), dtype=numpy.float32)
+        self.pred_test = numpy.empty(shape=[testset.num_doc,], dtype=numpy.float32)
 
         docs = T.imatrix()
         label = T.ivector()
@@ -47,6 +47,7 @@ class LSTMModel(object):
         
         docrepresentation = layers[5].output
 
+        pred = T.argmax(layers[-1].output, axis=1)
         cost = -T.mean(T.log(layers[-1].output)[T.arange(label.shape[0]), label], acc_dtype='float32')
         correct = T.sum(T.eq(T.argmax(layers[-1].output, axis=1), label), acc_dtype='int32')
         err = T.argmax(layers[-1].output, axis=1) - label
@@ -70,7 +71,7 @@ class LSTMModel(object):
 
         self.test_model = theano.function(
             inputs=[docs, label,length,sentencenum,wordmask,sentencemask,maxsentencenum],
-            outputs=[correct, mse, docrepresentation],
+            outputs=[correct, mse, docrepresentation, pred],
         )
 
     def train(self, iters):
@@ -95,6 +96,7 @@ class LSTMModel(object):
             mis += tmp[1]
             tot += len(self.testset.label[i])
             self.doc_emb_test[i*16:(i+1)*16,:] = tmp[2]
+            self.pred_test[i*16:(i+1)*16] = tmp[3]
         print 'Accuracy:',float(cor)/float(tot),'RMSE:',numpy.sqrt(float(mis)/float(tot))
         return cor, mis, tot
 
@@ -115,6 +117,12 @@ class LSTMModel(object):
         cPickle.dump(doc_emb, f, protocol=cPickle.HIGHEST_PROTOCOL)
         f.close()
         print '-> saved doc embedding testing'
+
+    def save_pred_test(self, result):
+        f = file('../cba_pred_test_lstm.save', 'wb')
+        cPickle.dump(result, f, protocol=cPickle.HIGHEST_PROTOCOL)
+        f.close()
+        print '--> saved final prediction: test_data'
 
     def load_doc_emb(self):
         f = file('../emb_doc.save', 'rb')
