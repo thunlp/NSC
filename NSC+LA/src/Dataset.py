@@ -34,7 +34,7 @@ def gensentencemask(sentencenum):
     return mask.T
 
 class Dataset(object):
-    def __init__(self, filename, emb,maxbatch = 32,maxword = 500):
+    def __init__(self, filename, emb,maxbatch = 16,maxword = 500):
         lines = map(lambda x: x.split('\t\t'), open(filename).readlines())            
         label = numpy.asarray(
             map(lambda x: int(x[2])-1, lines),
@@ -44,6 +44,8 @@ class Dataset(object):
         docs = map(lambda x: x.split('<sssss>'), docs) 
         docs = map(lambda doc: map(lambda sentence: sentence.split(' '),doc),docs)
         docs = map(lambda doc: map(lambda sentence: filter(lambda wordid: wordid !=-1,map(lambda word: emb.getID(word),sentence)),doc),docs)
+        self.num_doc = len(docs)
+        
         tmp = zip(docs, label)
         #random.shuffle(tmp)
         tmp.sort(lambda x, y: len(y[0]) - len(x[0]))  

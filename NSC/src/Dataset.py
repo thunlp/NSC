@@ -43,6 +43,8 @@ class Dataset(object):
         docs = map(lambda x: x.split('<sssss>'), docs) 
         docs = map(lambda doc: map(lambda sentence: sentence.split(' '),doc),docs)
         docs = map(lambda doc: map(lambda sentence: filter(lambda wordid: wordid !=-1,map(lambda word: emb.getID(word),sentence)),doc),docs)
+        self.num_doc = len(docs)
+        
         tmp = zip(docs, label)
         #random.shuffle(tmp)
         tmp.sort(lambda x, y: len(y[0]) - len(x[0]))  
@@ -71,6 +73,15 @@ class Dataset(object):
             self.sentencenum.append(numpy.asarray(sentencenum[i*maxbatch:(i+1)*maxbatch],dtype = numpy.float32)+numpy.float32(1e-4))
             self.wordmask.append(genwordmask(docsbatch))
             self.sentencemask.append(gensentencemask(sentencenum[i*maxbatch:(i+1)*maxbatch]))
+            # if i == 0 or i == 1 or i == 2 or i ==3 :
+            #     print i
+            #     print numpy.shape(docsbatch)
+            #     print numpy.shape(self.wordmask)
+            #     print numpy.shape(self.sentencenum)
+            #     print self.sentencenum
+            #     print numpy.shape(self.sentencemask)
+            #     print numpy.shape(self.length)
+            #     print sorted(self.length[0], reverse=True)[1:10]
         
 
 class Wordlist(object):
